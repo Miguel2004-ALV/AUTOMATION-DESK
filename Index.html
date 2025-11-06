@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AUTOMATION DESK - Proyecto Universidad San Buenaventura</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #1e3a8a;
+      --secondary-color: #3b82f6;
+      --accent-color: #fbbf24;
+      --dark-bg: #1f2937;
+      --light-bg: #f3f4f6;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+      background-color: var(--light-bg);
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      padding: 6rem 0;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .navbar {
+      background-color: var(--dark-bg) !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .section-title {
+      position: relative;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-img-placeholder {
+      height: 200px;
+      background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .objective-card {
+      background: white;
+      border-left: 4px solid var(--secondary-color);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      padding-bottom: 2rem;
+      border-left: 2px solid var(--secondary-color);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+    }
+
+    .timeline-item:last-child {
+      border-left: 2px solid transparent;
+    }
+
+    .risk-table {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .badge-custom {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .comparison-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .comparison-card:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon-box-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+    .icon-box-green { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+    .icon-box-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+    .icon-box-orange { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .btn-floating {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      display: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      animation: fadeInUp 0.8s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#inicio">
+        <i class="fas fa-robot me-2"></i>AUTOMATION DESK
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#problema">Problema</a></li>
+          <li class="nav-item"><a class="nav-link" href="#objetivos">Objetivos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#estado-arte">Estado del Arte</a></li>
+          <li class="nav-item"><a class="nav-link" href="#riesgos">Riesgos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#cronograma">Cronograma</a></li>
+          <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero-section">
+    <div class="container hero-content text-center">
+      <h1 class="display-3 fw-bold mb-3 animate-on-scroll">AUTOMATION DESK</h1>
+      <p class="lead fs-3 mb-4">Banco de Entrenamiento para Control de Motores Eléctricos</p>
+      <p class="fs-5 mb-4">Universidad San Buenaventura - Sede Bogotá</p>
+      <p class="mb-4">Fundamentos de Proyectos de Tecnología</p>
+      <a href="#video" class="btn btn-light btn-lg me-3 mb-3">
+        <i class="fas fa-play-circle me-2"></i>Ver Video
+      </a>
+      <a href="#problema" class="btn btn-outline-light btn-lg mb-3">
+        <i class="fas fa-arrow-down me-2"></i>Conoce Más
+      </a>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section id="video" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center section-title">Video de Presentación</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="video-container">
+            <!-- Agregar URL del video de YouTube aquí -->
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+          </div>
+          <p class="text-center text-muted mt-3">
+            <i class="fas fa-info-circle me-2"></i>Reemplaza "VIDEO_ID" con el ID de tu video de YouTube
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problema Section -->
+  <section id="problema" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Pregunta Problema</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-start">
+                <div class="icon-box icon-box-blue me-3">
+                  <i class="fas fa-question"></i>
+                </div>
+                <div>
+                  <h4 class="mb-3">¿Qué tipo de estrategias y/o métodos de entrenamiento se pueden aplicar?</h4>
+                  <p class="lead">Para reforzar el conocimiento en arranque, control y supervisión de motores eléctricos para los estudiantes de la facultad de ingeniería de la Universidad San Buenaventura.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Justificación Section -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center section-title">Justificación</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="card-img-placeholder">
+            <div class="text-center">
+              <i class="fas fa-industry fa-4x mb-3"></i>
+              <p>Imagen: Banco de trabajo actual</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h4 class="mb-3">Obsolescencia de Equipos Actuales</h4>
+          <p>Durante las visitas al hangar, se evidenció que los bancos de arranque y control de motores eléctricos presentan <strong>obsolescencia percibida</strong>, con componentes y sistemas de generaciones pasadas.</p>
+          
+          <h4 class="mt-4 mb-3">Necesidad de Modernización</h4>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Integración con tecnologías Industria 4.0</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Control mediante PLC y sistemas IoT</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Automatización avanzada</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Comunicación entre dispositivos (IoT industrial)</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Sistemas basados en software especializado</li>
+          </ul>
+
+          <div class="alert alert-info mt-4">
+            <i class="fas fa-lightbulb me-2"></i>
+            <strong>Brecha actual:</strong> Existe una diferencia significativa entre la teoría impartida en el aula y la práctica real en entornos industriales contemporáneos.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objetivos Section -->
+  <section id="objetivos" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Objetivos del Proyecto</h2>
+      
+      <!-- Objetivo General -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+          <div class="card border-primary">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0"><i class="fas fa-bullseye me-2"></i>Objetivo General</h4>
+            </div>
+            <div class="card-body">
+              <p class="lead mb-0">Brindar una ampliación y mejora de los bancos actuales que posee la universidad para aumentar la cantidad de prácticas y conocimiento en control de motores eléctricos y sus respectivos planos y procesos industriales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Objetivos Específicos -->
+      <h3 class="text-center mb-4">Objetivos Específicos</h3>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="objective-card">
+            <div class="d-flex align-items-start">
+              <div class="icon-box icon-box-blue me-3">
+                <i class="fas fa-book"></i>
+              </div>
+              <div>
+                <h5>Documentación Clara</h5>
+                <p class="mb-0">Crear documentación sobre materiales, planos eléctricos y situaciones de estudio para facilitar la interpretación de conexiones mediante normas técnicas y software especializado.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="objective-card">
+            <div class="d-flex align-items-start">
+              <div class="icon-box icon-box-green me-3">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <div>
+                <h5>Actividades Prácticas</h5>
+                <p class="mb-0">Diseñar actividades basadas en escenarios reales de la industria para promover el aprendizaje dinámico mediante simulación de arranques, PLCs y sistemas de protección.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="objective-card">
+            <div class="d-flex align-items-start">
+              <div class="icon-box icon-box-purple me-3">
+                <i class="fas fa-microchip"></i>
+              </div>
+              <div>
+                <h5>Tecnologías Modernas</h5>
+                <p class="mb-0">Incorporar tecnologías de control y monitoreo mediante variadores de frecuencia, sensores inteligentes y módulos IoT.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="objective-card">
+            <div class="d-flex align-items-start">
+              <div class="icon-box icon-box-orange me-3">
+                <i class="fas fa-recycle"></i>
+              </div>
+              <div>
+                <h5>Diseño Sostenible</h5>
+                <p class="mb-0">Garantizar un producto didáctico con estética industrial, manteniendo la disposición de accesorios eléctricos y electrónicos, sin desechar materiales antiguos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estado del Arte Section -->
+  <section id="estado-arte" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center section-title">Estado del Arte</h2>
+      <p class="text-center text-muted mb-5">Comparativo de productos respecto a nuestra solución</p>
+
+      <div class="row">
+        <!-- Propuesta 1 -->
+        <div class="col-lg-6 mb-4">
+          <div class="comparison-card">
+            <div class="card-img-placeholder mb-3">
+              <div class="text-center">
+                <i class="fas fa-cog fa-3x mb-2"></i>
+                <p>Imagen: Banco DOIANG</p>
+              </div>
+            </div>
+            <h4><i class="fas fa-industry me-2 text-primary"></i>Propuesta DOIANG</h4>
+            <p><strong>Base:</strong> PLC S7-1200 SIEMENS</p>
+            <ul class="mb-3">
+              <li>Banco de pulsadores e interruptores</li>
+              <li>Entradas para sensores</li>
+              <li>Salidas con pilotos luminosos</li>
+              <li>Tableros gráficos de procesos</li>
+              <li>Conexión mediante conectores banana</li>
+            </ul>
+            <a href="https://es.dolangskills.com/product/dlplc-simgd-1200-siemens-plc-training-equipment-siemens-plc-trainer-plc-training-workbench-of-vocational-education-equipment" class="btn btn-outline-primary btn-sm" target="_blank">
+              <i class="fas fa-external-link-alt me-2"></i>Ver más
+            </a>
+          </div>
+        </div>
+
+        <!-- Propuesta 2 -->
+        <div class="col-lg-6 mb-4">
+          <div class="comparison-card">
+            <div class="card-img-placeholder mb-3">
+              <div class="text-center">
+                <i class="fas fa-laptop fa-3x mb-2"></i>
+                <p>Imagen: Academia PLC</p>
+              </div>
+            </div>
+            <h4><i class="fas fa-graduation-cap me-2 text-success"></i>Academia PLC</h4>
+            <p><strong>Tipo:</strong> Simulador Virtual</p>
+            <ul class="mb-3">
+              <li>Cursos de automatización industrial</li>
+              <li>Programación en diagrama LADDER</li>
+              <li>Simulaciones básicas y de dificultad media</li>
+              <li>Enfoque en múltiples marcas de PLC</li>
+              <li>Visualización de sistemas en tiempo real</li>
+            </ul>
+            <a href="https://www.academiadeplc.com/plc-animador" class="btn btn-outline-success btn-sm" target="_blank">
+              <i class="fas fa-external-link-alt me-2"></i>Ver más
+            </a>
+          </div>
+        </div>
+
+        <!-- Propuesta 3 -->
+        <div class="col-lg-6 mb-4">
+          <div class="comparison-card">
+            <div class="card-img-placeholder mb-3">
+              <div class="text-center">
+                <i class="fas fa-university fa-3x mb-2"></i>
+                <p>Imagen: Universidad del Caribe</p>
+              </div>
+            </div>
+            <h4><i class="fas fa-flask me-2 text-info"></i>Universidad del Caribe</h4>
+            <p><strong>Componentes:</strong> Sistema integrado IoT</p>
+            <ul class="mb-3">
+              <li>PLC S7-1200 con extensión de terminales</li>
+              <li>HMI SIEMENS</li>
+              <li>Variador Micromaster 420</li>
+              <li>Interconexión de dispositivos</li>
+              <li>Sistemas SCADA a escala</li>
+            </ul>
+            <a href="http://repositorio.uac.edu.co/bitstream/handle/11619/4094/IMK0133.pdf" class="btn btn-outline-info btn-sm" target="_blank">
+              <i class="fas fa-external-link-alt me-2"></i>Ver documento
+            </a>
+          </div>
+        </div>
+
+        <!-- Propuesta 4 -->
+        <div class="col-lg-6 mb-4">
+          <div class="comparison-card">
+            <div class="card-img-placeholder mb-3">
+              <div class="text-center">
+                <i class="fas fa-building fa-3x mb-2"></i>
+                <p>Imagen: SIEMENS SITRAIN</p>
+              </div>
+            </div>
+            <h4><i class="fas fa-certificate me-2 text-warning"></i>SIEMENS (SITRAIN)</h4>
+            <p><strong>Enfoque:</strong> Capacitación especializada</p>
+            <ul class="mb-3">
+              <li>Bancos sencillos por dispositivo</li>
+              <li>PLCs modulares y compactos</li>
+              <li>Variadores de frecuencia y HMI</li>
+              <li>Interconexión entre dispositivos</li>
+              <li>Programas personalizados por curso</li>
+            </ul>
+            <a href="https://assets.new.siemens.com/siemens/assets/api/uuid:7bac513a-3448-481e-b177-4c8222f163c6/sitran-nuevo-catalogo-online.pdf" class="btn btn-outline-warning btn-sm" target="_blank">
+              <i class="fas fa-external-link-alt me-2"></i>Ver catálogo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Matriz de Riesgos Section -->
+  <section id="riesgos" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Matriz de Riesgos</h2>
+      <div class="risk-table">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-primary">
+              <tr>
+                <th>Riesgo</th>
+                <th>Probabilidad</th>
+                <th>Impacto</th>
+                <th>Nivel</th>
+                <th>Medidas de Mitigación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Falta de sentido de pertenencia hacia el proyecto</td>
+                <td><span class="badge bg-warning">Media</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td>Consultas internas sobre cómo se siente cada miembro</td>
+              </tr>
+              <tr>
+                <td>Diferencias y errores de comunicación entre los miembros</td>
+                <td><span class="badge bg-warning">Media</span></td>
+                <td><span class="badge bg-warning">Medio</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td>Establecer reglas de comunicación adecuada</td>
+              </tr>
+              <tr>
+                <td>No comunicar asertivamente la idea ante los jueces</td>
+                <td><span class="badge bg-danger">Alta</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td>Revisión constante con apoyo del docente y compañeros</td>
+              </tr>
+              <tr>
+                <td>No ser suficientemente innovadores</td>
+                <td><span class="badge bg-warning">Media</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td><span class="badge bg-danger">Alta</span></td>
+                <td>Analizar factor diferencial con respecto a otros proyectos</td>
+              </tr>
+              <tr>
+                <td>El objetivo no sea cubierto a cabalidad</td>
+                <td><span class="badge bg-success">Baja</span></td>
+                <td><span class="badge bg-warning">Medio</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td>Investigar contexto local y necesidades específicas</td>
+              </tr>
+              <tr>
+                <td>No cumplir con plazos de entrega</td>
+                <td><span class="badge bg-warning">Media</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td><span class="badge bg-danger">Alto</span></td>
+                <td>Cumplir con el diagrama de GANTT establecido</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cronograma Section -->
+  <section id="cronograma" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center section-title">Cronograma del Proyecto</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-img-placeholder mb-4">
+                <div class="text-center">
+                  <i class="fas fa-calendar-alt fa-4x mb-3"></i>
+                  <p>Imagen: Diagrama de GANTT</p>
+                  <p class="small text-muted">Aquí va la imagen del diagrama de GANTT del documento</p>
+                </div>
+              </div>
+
+              <h4 class="mb-4">Fases del Proyecto (1 Semestre)</h4>
+              
+              <div class="timeline-item">
+                <h5><i class="fas fa-search me-2 text-primary"></i>Semanas 1-4: Investigación y Planificación</h5>
+                <ul>
+                  <li>Recolección de información sobre bancos de entrenamiento</li>
+                  <li>Análisis de tecnologías disponibles</li>
+                  <li>Definición de requerimientos técnicos</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <h5><i class="fas fa-drafting-compass me-2 text-success"></i>Semanas 5-8: Diseño y Propuesta Técnica</h5>
+                <ul>
+                  <li>Diseño conceptual del banco de trabajo</li>
+                  <li>Selección de componentes y materiales</li>
+                  <li>Creación de planos eléctricos</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <h5><i class="fas fa-chart-bar me-2 text-info"></i>Semanas 9-12: Evaluación de Factibilidad</h5>
+                <ul>
+                  <li>Análisis de costos y beneficios</li>
+                  <li>Evaluación técnica y de impacto educativo</li>
+                  <li>Refinamiento del diseño</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item">
+                <h5><i class="fas fa-presentation me-2 text-warning"></i>Semanas 13-16: Presentación de Resultados</h5>
+                <ul>
+                  <li>Elaboración del informe final del proyecto</li>
+                  <li>Preparación de material de presentación</li>
+                  <li>Presentación ante docentes y evaluadores</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delimitación del Proyecto Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Delimitación del Proyecto</h2>
+      
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="card h-100">
+            <div class="card-header bg-success text-white">
+              <h4 class="mb-0"><i class="fas fa-check-circle me-2"></i>Elementos Incluidos</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-success me-2"></i>
+                  <strong>Análisis de viabilidad técnica</strong> para implementación en áreas con necesidades específicas
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-success me-2"></i>
+                  <strong>Evaluación del impacto educativo</strong> de la utilización de tecnologías modernas
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-success me-2"></i>
+                  <strong>Tecnologías de automatización</strong> a implementar (PLC, IoT, sensores)
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-success me-2"></i>
+                  <strong>Documentación técnica</strong> completa y detallada
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+          <div class="card h-100">
+            <div class="card-header bg-danger text-white">
+              <h4 class="mb-0"><i class="fas fa-times-circle me-2"></i>Aspectos NO Incluidos</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-danger me-2"></i>
+                  Implementación práctica y construcción física completa
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-danger me-2"></i>
+                  Estudio de casos en zonas específicas externas
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-danger me-2"></i>
+                  Cálculos detallados de todos los equipos
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-caret-right text-danger me-2"></i>
+                  Análisis de otros métodos de entrenamiento no relacionados
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delimitación Espacial -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Delimitación Espacial</h4>
+            </div>
+            <div class="card-body">
+              <h5><i class="fas fa-building me-2 text-primary"></i>Universidad San Buenaventura - Bogotá</h5>
+              <p>El proyecto se desarrolla específicamente en las instalaciones del <strong>hangar de la universidad</strong>, considerando:</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>Laboratorios de ingeniería eléctrica</li>
+                    <li>Espacios de práctica para estudiantes</li>
+                    <li>Infraestructura actual disponible</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul>
+                    <li>Áreas de almacenamiento de equipos</li>
+                    <li>Zonas de implementación del nuevo banco</li>
+                    <li>Acceso para estudiantes de ingeniería</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipo Section -->
+  <section id="equipo" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center section-title">Equipo de Trabajo</h2>
+      <p class="text-center text-muted mb-5">Universidad San Buenaventura - Sede Bogotá</p>
+      
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="card-img-placeholder mb-3" style="height: 150px;">
+                <i class="fas fa-user-circle fa-4x text-primary"></i>
+              </div>
+              <h5 class="card-title">Eimar Esteban García</h5>
+              <p class="text-muted">Integrante del equipo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="card-img-placeholder mb-3" style="height: 150px;">
+                <i class="fas fa-user-circle fa-4x text-success"></i>
+              </div>
+              <h5 class="card-title">Bryan Cadena Agudelo</h5>
+              <p class="text-muted">Integrante del equipo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="card-img-placeholder mb-3" style="height: 150px;">
+                <i class="fas fa-user-circle fa-4x text-info"></i>
+              </div>
+              <h5 class="card-title">Ángel David Rubio</h5>
+              <p class="text-muted">Integrante del equipo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <div class="card-img-placeholder mb-3" style="height: 150px;">
+                <i class="fas fa-user-circle fa-4x text-warning"></i>
+              </div>
+              <h5 class="card-title">Miguel Ángel Álvarez</h5>
+              <p class="text-muted">Integrante del equipo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5><i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Fundamentos de Proyectos de Tecnología</h5>
+            <p class="mb-0 text-muted">Universidad San Buenaventura - Facultad de Ingeniería</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores Franciscanos Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Valores Franciscanos</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card border-warning">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-heart fa-3x text-warning mb-3"></i>
+              <h4 class="mb-3">El Saber tiene un Sentido Práctico</h4>
+              <p class="lead">Este proyecto aplica el valor franciscano del conocimiento práctico, reforzando el sentido de pertenencia hacia la universidad y demostrando que el saber debe estar al servicio de las necesidades reales de la comunidad educativa.</p>
+              <p class="mb-0">Buscamos no solo modernizar equipos, sino formar ingenieros competentes, innovadores y capaces de afrontar los desafíos tecnológicos actuales y futuros.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impacto del Proyecto Section -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center section-title">Impacto del Proyecto</h2>
+      
+      <div class="row">
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="icon-box icon-box-blue mx-auto">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h5 class="mt-3">Impacto Educativo</h5>
+              <p>Fortalecimiento de la formación práctica y fomento del pensamiento crítico en estudiantes de ingeniería.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="icon-box icon-box-green mx-auto">
+                <i class="fas fa-sync-alt"></i>
+              </div>
+              <h5 class="mt-3">Actualización Tecnológica</h5>
+              <p>Modernización del entorno educativo alineado con la Industria 4.0 y tecnologías actuales.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="icon-box icon-box-purple mx-auto">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <h5 class="mt-3">Innovación</h5>
+              <p>Posicionamiento de la institución como referente en automatización y control industrial.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card text-center h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="icon-box icon-box-orange mx-auto">
+                <i class="fas fa-users-cog"></i>
+              </div>
+              <h5 class="mt-3">Preparación Profesional</h5>
+              <p>Ingenieros competentes y capaces de afrontar desafíos tecnológicos del sector productivo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto y Enlaces Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Información Adicional</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body text-center p-4">
+              <h4 class="mb-4">¿Quieres saber más?</h4>
+              <p class="mb-4">Visita nuestro portafolio completo del proyecto para más información detallada.</p>
+              <a href="https://eimarusb.github.io/ECOSPORT/" class="btn btn-primary-custom btn-lg" target="_blank">
+                <i class="fas fa-external-link-alt me-2"></i>Ver Portafolio Completo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-4 mb-md-0">
+          <h5><i class="fas fa-robot me-2"></i>AUTOMATION DESK</h5>
+          <p class="text-muted">Proyecto de Fundamentos de Proyectos de Tecnología</p>
+          <p class="text-muted">Universidad San Buenaventura - Sede Bogotá</p>
+        </div>
+        <div class="col-md-3 mb-4 mb-md-0">
+          <h5>Enlaces Rápidos</h5>
+          <ul class="list-unstyled">
+            <li><a href="#inicio" class="text-muted text-decoration-none">Inicio</a></li>
+            <li><a href="#objetivos" class="text-muted text-decoration-none">Objetivos</a></li>
+            <li><a href="#estado-arte" class="text-muted text-decoration-none">Estado del Arte</a></li>
+            <li><a href="#equipo" class="text-muted text-decoration-none">Equipo</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Redes Sociales</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-muted fs-4"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-muted fs-4"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-muted fs-4"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-muted fs-4"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-4 mb-3 bg-secondary">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p class="mb-0 text-muted">&copy; 2025 AUTOMATION DESK. Todos los derechos reservados.</p>
+          <p class="mb-0 text-muted small">Universidad San Buenaventura - Bogotá, Colombia</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante para volver arriba -->
+  <a href="#inicio" class="btn btn-primary btn-lg btn-floating rounded-circle shadow">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JavaScript personalizado -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Botón flotante para volver arriba
+      const btnFloating = document.querySelector('.btn-floating');
+      
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          btnFloating.style.display = 'block';
+        } else {
+          btnFloating.style.display = 'none';
+        }
+      });
+
+      // Smooth scroll para todos los enlaces internos
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Animación al hacer scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-on-scroll');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.card, .objective-card, .comparison-card').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Destacar enlace del navbar activo
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
